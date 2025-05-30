@@ -1,0 +1,37 @@
+CREATE DATABASE Rainsta_DB_Ekspedisi_29;
+USE Rainsta_DB_Ekspedisi_29;
+
+CREATE TABLE users (
+    id_user INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50),
+    password VARCHAR(255),
+    role ENUM('admin', 'user')
+);
+
+CREATE TABLE kurir (
+    id_kurir INT AUTO_INCREMENT PRIMARY KEY,
+    nama_kurir VARCHAR(100),
+    no_hp VARCHAR(15)
+);
+
+CREATE TABLE pengiriman (
+    id_pengiriman INT AUTO_INCREMENT PRIMARY KEY,
+    id_user INT,
+    nama_pengirim VARCHAR(100),
+    nama_penerima VARCHAR(100),
+    alamat_tujuan TEXT,
+    berat FLOAT,
+    tanggal_kirim DATE,
+    id_kurir INT,
+    status VARCHAR(50),
+    FOREIGN KEY (id_user) REFERENCES users(id_user),
+    FOREIGN KEY (id_kurir) REFERENCES kurir(id_kurir)
+);
+
+CREATE TABLE status_pengiriman (
+    id_status INT AUTO_INCREMENT PRIMARY KEY,
+    id_pengiriman INT,
+    status VARCHAR(100),
+    waktu DATETIME,
+    FOREIGN KEY (id_pengiriman) REFERENCES pengiriman(id_pengiriman)
+);
