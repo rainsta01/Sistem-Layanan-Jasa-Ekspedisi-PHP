@@ -11,4 +11,4 @@ $stmt = $conn->prepare("INSERT INTO users (username, password, role) VALUES (?, 
 $stmt->bind_param("sss", $username, $hash, $role);
 $stmt->execute();
 
-echo "User berhasil ditambahkan!";
+ header('Location: index.php');
